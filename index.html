@@ -1,0 +1,53 @@
+<!doctype html>
+<html ng-app="memoryGameApp">
+<head>
+  <meta charset="utf-8">
+  <title>Memory Game</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script type="text/javascript" src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular/ng-chromecast.js"></script>
+  <script src="lib/angular/angular.audio.js"></script>
+
+  <script src="js/app.js"></script>
+  <script src="js/sounds.js"></script>
+  <script src="js/game.js"></script>
+  
+</head>
+<body ng-controller="GameCtrl">
+  <div id="screen">
+
+      <div>
+          <table>
+            <tr>
+                <th></th>
+                <th ng-repeat="col in game.board[0]">{{$index+1}}</th>
+            </tr>
+
+            <tr ng-repeat="row in game.board">
+              <td>{{indexToChar($index)}}</td>
+              <td ng-repeat="cell in row" id="item_{{$parent.$index}}_{{$index}}" ng-click="game.flipCell(cell)">
+
+              
+                <div class="container">
+                  <div class="card" ng-class="{flipped: cell.flipped}">
+                      <img class="front" ng-src="img/back.png">
+                      <img class="back" ng-src="img/{{cell.title}}.png">
+                  </div>
+                </div>
+
+              </td>
+            </tr>
+          </table>
+      </div>
+      
+      <div>{{game.message}}</div>
+      <div id="logo">
+            <img src="img/logo.png" alt="logo">
+      </div>
+      
+     
+  </div>
+  
+</body>
+</html>
